@@ -186,4 +186,5 @@ input/
 *.out
 saved/
 configs/
+!mmsegmentation/configs/*
 augmentation/
