@@ -33,6 +33,7 @@ from trainer import Trainer
 from utils import collate_fn, get_save_dir
 from optimizer import get_optimizer, get_scheduler
 
+import wandb
 
 def main(config):
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -45,6 +46,9 @@ def main(config):
     momentum = config.getfloat('hyper_params', 'momentum')
     num_workers = config.getint('hyper_params', 'num_workers')
     preprocessing = config.getboolean('hyper_params', 'preprocessing')
+    #wandb config
+    wandb_project = config.get('wandb', 'project')
+    wandb_name = config.get('wandb', 'name')
 
     torch.manual_seed(random_seed)
     torch.cuda.manual_seed(random_seed)
@@ -86,6 +90,7 @@ def main(config):
                                          )
 
     architecture = config.get('model','architecture')
+   
     model = getattr(import_module("segmentation_models_pytorch"),architecture) 
 
     model = model(
@@ -103,7 +108,15 @@ def main(config):
     optimizer = get_optimizer(model, config.get('hyper_params','optimizer'), lr=learning_rate,momentum=momentum, weight_decay=weight_decay)
     # optimizer = optimizer(params = model.parameters(), lr = learning_rate, weight_decay=weight_decay)
     
-    trainer = Trainer(num_epochs, model, train_loader, val_loader, criterion, optimizer, saved_dir, val_every, device)
+    trainer = Trainer(num_epochs, model, train_loader, val_loader, criterion, optimizer, saved_dir, val_every, batch_size, device)
+
+    #wandb init
+    wandb.init(entity="carry-van", project=wandb_project, name=wandb_name, config={
+        "device":device, "batch_size":batch_size,"num_epochs":num_epochs, "learnig_rate":learning_rate, "preprocessing":preprocessing})
+    wandb.config.encoder_name = encoder_name
+    wandb.config.encoder_weight = encoder_weight
+    wandb.config.architecture = architecture
+
     trainer.train()
 
 
@@ -117,5 +130,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     config = ConfigParser()
     config.read(args.config_dir)
-
+   
     main(config)
