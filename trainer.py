@@ -1,6 +1,5 @@
 import numpy as np
 import torch
-from torch.cuda import device_count
 import os.path as osp
 import wandb
 from wandb_img import wb_mask
@@ -9,7 +8,7 @@ from utils import label_accuracy_score, add_hist
 
 class Trainer(object):
 
-    def __init__(self, num_epochs, model, data_loader, val_loader, criterion, optimizer, saved_dir, val_every, batch_size, device):
+    def __init__(self, num_epochs, model, data_loader, val_loader, criterion, optimizer, saved_dir, val_every, batch_size, resume_path, device):
 
         self.num_epochs = num_epochs
         self.model = model
@@ -21,6 +20,14 @@ class Trainer(object):
         self.val_every = val_every
         self.batch_size = batch_size
         self.device = device
+        self.start_epoch = 0
+        self.resume_path = resume_path
+
+        if self.resume_path:
+            check_point = torch.load(resume_path)
+            self.model.load_state_dict(check_point['state_dict'])
+            self.optimizer.load_state_dict(check_point['optimizer'])
+            self.start_epoch = check_point['epoch']
 
         self.n_class = 11
         self.best_loss = 9999999
@@ -52,6 +59,9 @@ class Trainer(object):
 
         for epoch in range(self.num_epochs):
             model.train()
+
+            if (self.start_epoch) and (epoch >= self.start_epoch):
+                continue
 
             hist = np.zeros((self.n_class, self.n_class))
             for step, (images, masks, _) in enumerate(self.data_loader):
@@ -96,16 +106,21 @@ class Trainer(object):
                         print(f"Best performance at epoch: {epoch + 1}")
                         print(f"Save model in {self.saved_dir}")
                         best_mIoU = avrg_mIoU
-                        check_point = {'net': model.state_dict()}
                         output_path = osp.join(self.saved_dir, 'best_mIoU.pt')
                         torch.save(model, output_path)
                     if avrg_loss < best_loss:
                         print(f"Best performance at epoch: {epoch + 1}")
                         print(f"Save model in {self.saved_dir}")
                         best_loss = avrg_loss
-                        check_point = {'net': model.state_dict()}
                         output_path = osp.join(self.saved_dir, 'best_loss.pt')
                         torch.save(model, output_path)
+            
+            check_point = {
+                'epoch': epoch,
+                'state_dict': model.state_dict(),
+                'optimizer': self.optimizer.state_dict()
+            }
+            torch.save(check_point, osp.join(self.saved_dir, 'checkpoint.pt'))
 
     def _validation(self, epoch, model):
         category_names = ['Backgroud', 'General trash', 'Paper', 'Paper pack', 'Metal', 'Glass', 'Plastic', 'Styrofoam', 'Plastic bag', 'Battery', 'Clothing']
