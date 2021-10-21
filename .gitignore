@@ -187,3 +187,4 @@ input/
 saved/
 augmentation/
 wandb/
+!mmsegmentation/configs/*
