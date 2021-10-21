@@ -185,6 +185,5 @@ input/
 *.pt
 *.out
 saved/
-configs/
-!mmsegmentation/configs/*
 augmentation/
+wandb/
