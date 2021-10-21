@@ -176,7 +176,6 @@ cython_debug/
 
 # self-added
 baseline_code/
-mmsegmentation/
 ._baseline_code
 ._input
 input/
@@ -186,6 +185,6 @@ input/
 *.pt
 *.out
 saved/
-configs/
 augmentation/
 wandb/
+!mmsegmentation/configs/*

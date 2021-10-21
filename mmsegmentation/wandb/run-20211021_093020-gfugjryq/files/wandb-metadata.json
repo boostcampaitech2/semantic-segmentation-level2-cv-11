@@ -1,0 +1,26 @@
+{
+    "os": "Linux-4.4.0-59-generic-x86_64-with-debian-buster-sid",
+    "python": "3.7.11",
+    "heartbeatAt": "2021-10-21T09:30:21.282085",
+    "startedAt": "2021-10-21T09:30:20.393195",
+    "docker": null,
+    "gpu": "Tesla V100-PCIE-32GB",
+    "gpu_count": 1,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [
+        "configs/jinwoo/jinwoo.py"
+    ],
+    "state": "running",
+    "program": "tools/train.py",
+    "codePath": "mmsegmentation/tools/train.py",
+    "git": {
+        "remote": "https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-11.git",
+        "commit": "8938b90492f2137f52c2c7853a6f2696453b7e38"
+    },
+    "email": "tjdwnsdud3@naver.com",
+    "root": "/opt/ml/segmentation/baseline",
+    "host": "96099a99de11",
+    "username": "root",
+    "executable": "/opt/conda/envs/mmsemantic/bin/python"
+}
