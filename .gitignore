@@ -176,7 +176,6 @@ cython_debug/
 
 # self-added
 baseline_code/
-mmsegmentation/
 ._baseline_code
 ._input
 input/
