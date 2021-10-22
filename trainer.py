@@ -24,6 +24,7 @@ class Trainer(object):
         self.resume_path = resume_path
 
         if self.resume_path:
+            self.model.to(device)
             check_point = torch.load(resume_path)
             self.model.load_state_dict(check_point['state_dict'])
             self.optimizer.load_state_dict(check_point['optimizer'])
@@ -116,7 +117,7 @@ class Trainer(object):
                         torch.save(model, output_path)
             
             check_point = {
-                'epoch': epoch,
+                'epoch': epoch + 1,
                 'state_dict': model.state_dict(),
                 'optimizer': self.optimizer.state_dict()
             }
