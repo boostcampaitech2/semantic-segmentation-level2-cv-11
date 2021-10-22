@@ -11,7 +11,7 @@ import segmentation_models_pytorch as smp
 from albumentations.pytorch import ToTensorV2
 from dataset import CustomDataLoader
 from utils import collate_fn
-
+from augmentation import get_validation_augmentation, get_preprocessing
 
 
 def inference(config, model_dir):
@@ -21,7 +21,12 @@ def inference(config, model_dir):
     encoder_name = config.get('model','encoder_name')
     encoder_weight = config.get('model','encoder_weight')
     architecture = config.get('model','architecture')
+    preprocessing = config.getboolean('hyper_params', 'preprocessing')
+
     model = getattr(import_module("segmentation_models_pytorch"),architecture) 
+
+    preprocessing_fn = smp.encoders.get_preprocessing_fn(encoder_name, encoder_weight)
+
 
     model = model(
         encoder_name=encoder_name, 
@@ -29,10 +34,8 @@ def inference(config, model_dir):
         in_channels=3,
         classes=11
     )
-    test_transform = A.Compose([
-                           ToTensorV2()
-                           ])
-    test_dataset = CustomDataLoader(data_dir=test_path, mode='test', transform=test_transform)
+    test_transform = get_validation_augmentation()
+    test_dataset = CustomDataLoader(data_dir=test_path, mode='test', transform=test_transform, preprocessing=get_preprocessing(preprocessing_fn) if preprocessing else False)
     test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
                                           batch_size=16,
                                           num_workers=4,
@@ -54,10 +57,10 @@ def inference(config, model_dir):
     preds_array = np.empty((0, size*size), dtype=np.long)
 
     with torch.no_grad():
-        for step, (imgs, image_infos) in enumerate(tqdm(test_loader)):
+        for step, (imgs, image_infos) in enumerate(tqdm(test_loader, leave=True)):
             
             model = model.to(device)
-            outs = model(torch.stack(imgs).to(device))
+            outs = model(torch.stack(imgs).to(device).float())
             oms = torch.argmax(outs.squeeze(), dim=1).detach().cpu().numpy()
 
             temp_mask = []

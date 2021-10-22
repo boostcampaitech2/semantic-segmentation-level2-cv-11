@@ -50,7 +50,7 @@ class CustomDataLoader(Dataset):
             # Background = 0
             masks = np.zeros((image_infos["height"], image_infos["width"]))
             # General trash = 1, ... , Cigarette = 10
-            anns = sorted(anns, key=lambda idx : len(idx['segmentation'][0]), reverse=True)
+            anns = sorted(anns, key=lambda idx : len(idx['area']), reverse=True)
             for i in range(len(anns)):
                 className = get_classname(anns[i]['category_id'], cats)
                 pixel_value = category_names.index(className)
@@ -73,6 +73,9 @@ class CustomDataLoader(Dataset):
             if self.transform is not None:
                 transformed = self.transform(image=images)
                 images = transformed["image"]
+            if self.preprocessing:
+                sample = self.preprocessing(image=images)
+                images = sample['image']
             return images, image_infos
     
     def __len__(self) -> int:
