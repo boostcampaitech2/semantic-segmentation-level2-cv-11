@@ -12,4 +12,3 @@ def get_optimizer(model, optimizer_name, lr=1e-4, momentum=0.9, weight_decay=5e-
 def get_scheduler(scheduler_name, optimizer, lr_decay_step, gamma=0.5):
     if scheduler_name.lower() == 'steplr':
         return StepLR(optimizer, lr_decay_step, gamma)
-

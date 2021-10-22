@@ -136,7 +136,7 @@ class Trainer(object):
                 masks = masks.detach().cpu().numpy()
 
                 #wandb image save
-                if epoch%5 == 0 and step < 2:
+                if epoch%3 == 0 and step < 2:
                     
                     images= images.detach().cpu().numpy().transpose([0,2,3,1])
                     for i in range(self.batch_size):
@@ -159,9 +159,11 @@ class Trainer(object):
             for cl in IoU_by_class:
                 category_dict.update(cl)
                 
-            wandb.log({"Category_IoU/": category_dict}) 
-            wandb.log({"Validation_epoch":epoch, "Average Loss":round(avrg_loss.item(), 4), "Validation Accuracy" : round(acc, 4), 'Validation mIoU': round(mIoU,4)})
-            wandb.log({"Examples":mask_list})
+            wandb.log({"Category_IoU": category_dict}) 
+            wandb.log({"Validation epoch":epoch, "Validation Average Loss":round(avrg_loss.item(), 4), "Validation Accuracy" : round(acc, 4), 'Validation mIoU': round(mIoU,4)})
+            if len(mask_list) != 0:
+                wandb.log({"Images":mask_list})
+                mask_list = []
             with open(osp.join(self.saved_dir, 'log.csv'),'a') as f:
                 log = [epoch, 'Val'] + [''] * 5 + \
                     [round(avrg_loss.item(),4)] + metrics 

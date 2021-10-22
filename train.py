@@ -104,6 +104,8 @@ def main(config):
     if not osp.isdir(saved_dir):
         os.mkdir(saved_dir)
         
+    #criterion = nn.CrossEntropyLoss()
+    loss = config.get('hyper_params','loss')
     criterion = nn.CrossEntropyLoss()
     optimizer = get_optimizer(model, config.get('hyper_params','optimizer'), lr=learning_rate,momentum=momentum, weight_decay=weight_decay)
     # optimizer = optimizer(params = model.parameters(), lr = learning_rate, weight_decay=weight_decay)
@@ -112,13 +114,11 @@ def main(config):
 
     #wandb init
     wandb.init(entity="carry-van", project=wandb_project, name=wandb_name, config={
-        "device":device, "batch_size":batch_size,"num_epochs":num_epochs, "learnig_rate":learning_rate, "preprocessing":preprocessing})
-    wandb.config.encoder_name = encoder_name
-    wandb.config.encoder_weight = encoder_weight
-    wandb.config.architecture = architecture
+        "device":device, "architecture":architecture,  "batch_size":batch_size,"num_epochs":num_epochs, 
+        "optimizer":optimizer, "learnig_rate":learning_rate, "preprocessing":preprocessing, "criterion":criterion, 
+        "encoder_name":encoder_name,"encoder_weight": encoder_weight})
 
     trainer.train()
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
