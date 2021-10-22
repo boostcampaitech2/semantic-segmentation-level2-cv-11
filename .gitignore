@@ -189,3 +189,4 @@ augmentation/
 wandb/
 configs/
 !mmsegmentation/configs/*
+submission/

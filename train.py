@@ -35,7 +35,7 @@ from optimizer import get_optimizer, get_scheduler
 
 import wandb
 
-def main(config):
+def main(config, resume):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     batch_size = config.getint('hyper_params', 'batch_size')
     num_epochs = config.getint('hyper_params', 'num_epochs')
@@ -46,6 +46,7 @@ def main(config):
     momentum = config.getfloat('hyper_params', 'momentum')
     num_workers = config.getint('hyper_params', 'num_workers')
     preprocessing = config.getboolean('hyper_params', 'preprocessing')
+    resume_path = resume
     #wandb config
     wandb_project = config.get('wandb', 'project')
     wandb_name = config.get('wandb', 'name')
@@ -100,6 +101,8 @@ def main(config):
         classes=11
     )
 
+    
+
     saved_dir = get_save_dir(config.get('path','saved_dir'))
     if not osp.isdir(saved_dir):
         os.mkdir(saved_dir)
@@ -110,7 +113,7 @@ def main(config):
     optimizer = get_optimizer(model, config.get('hyper_params','optimizer'), lr=learning_rate,momentum=momentum, weight_decay=weight_decay)
     # optimizer = optimizer(params = model.parameters(), lr = learning_rate, weight_decay=weight_decay)
     
-    trainer = Trainer(num_epochs, model, train_loader, val_loader, criterion, optimizer, saved_dir, val_every, batch_size, device)
+    trainer = Trainer(num_epochs, model, train_loader, val_loader, criterion, optimizer, saved_dir, val_every, batch_size, resume_path, device)
 
     #wandb init
     wandb.init(entity="carry-van", project=wandb_project, name=wandb_name, config={
@@ -127,8 +130,13 @@ if __name__ == '__main__':
         type=str,
         default="./configs/config.ini"
     )
+    parser.add_argument(
+        '--resume',
+        type=str,
+        default=None
+    )
     args = parser.parse_args()
     config = ConfigParser()
     config.read(args.config_dir)
    
-    main(config)
+    main(config, args.resume)
