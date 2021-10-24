@@ -45,7 +45,7 @@ def main(args):
     model = MMDataParallel(model.cuda(), device_ids=[0])
 
     output = single_gpu_test(model, data_loader)
-
+    
     # sample_submisson.csv 열기
     submission = pd.read_csv('/opt/ml/segmentation/baseline/sample_submission.csv', index_col=None)
     json_dir = os.path.join("/opt/ml/segmentation/input/data/test.json")
@@ -88,7 +88,6 @@ if __name__=='__main__':
         type=str,
         default='latest'
     )
-
     args = parser.parse_args()
 
     if args.config_dir is None:
