@@ -19,7 +19,7 @@ model = dict(
             norm_cfg=norm_cfg,
             concat_input=False,
             dropout_ratio=-1,
-            num_classes=21,
+            num_classes=11,
             align_corners=False,
             loss_decode=dict(
                 type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4)),
@@ -32,7 +32,7 @@ model = dict(
             in_index=(0, 1, 2, 3),
             norm_cfg=norm_cfg,
             dropout_ratio=-1,
-            num_classes=21,
+            num_classes=11,
             align_corners=False,
             loss_decode=dict(
                 type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0))
