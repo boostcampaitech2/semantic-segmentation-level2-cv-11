@@ -118,10 +118,9 @@ def main(config, resume):
 
     #wandb init
     wandb.init(entity="carry-van", project=wandb_project, name=wandb_name, config={
-        "device":device, "batch_size":batch_size,"num_epochs":num_epochs, "learnig_rate":learning_rate, "preprocessing":preprocessing})
-    wandb.config.encoder_name = encoder_name
-    wandb.config.encoder_weight = encoder_weight
-    wandb.config.architecture = architecture
+        "device":device, "architecture":architecture,  "batch_size":batch_size,"num_epochs":num_epochs, 
+        "optimizer":config.get('hyper_params','optimizer'), "learnig_rate":learning_rate, "preprocessing":preprocessing, "criterion":criterion, 
+        "encoder_name":encoder_name,"encoder_weight": encoder_weight})
 
     trainer.train()
 
