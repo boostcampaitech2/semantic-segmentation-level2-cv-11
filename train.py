@@ -82,7 +82,7 @@ def main(config, resume):
                                            shuffle=True,
                                            num_workers=num_workers,
                                            collate_fn=collate_fn,
-                                           drop_last=False
+                                           drop_last=drop_last
                                            )
 
     val_loader = torch.utils.data.DataLoader(dataset=val_dataset, 
@@ -90,7 +90,7 @@ def main(config, resume):
                                          shuffle=False,
                                          num_workers=num_workers,
                                          collate_fn=collate_fn,
-                                         drop_last=False
+                                         drop_last=drop_last
                                          )
 
     architecture = config.get('model','architecture')
