@@ -23,7 +23,6 @@ def main(args):
         ensemble_result = []
         file_name = ensembles[0]['image_id'][i]
         ps = np.array([j['PredictionString'][i].split() for j in ensembles])
-        vote = Counter(ps[:, 0])
         for j in range(65536):
             vote = Counter(ps[:, j])
             for k in vote:
