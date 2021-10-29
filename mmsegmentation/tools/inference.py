@@ -33,7 +33,7 @@ def main(args):
     dataset = build_dataset(cfg.data.test)
     data_loader = build_dataloader(
             dataset,
-            samples_per_gpu=1,
+            samples_per_gpu=2,
             workers_per_gpu=cfg.data.workers_per_gpu,
             dist=False,
             shuffle=False)
@@ -47,8 +47,8 @@ def main(args):
     output = single_gpu_test(model, data_loader)
     
     # sample_submisson.csv 열기
-    submission = pd.read_csv('/opt/ml/segmentation/baseline/sample_submission.csv', index_col=None)
-    json_dir = os.path.join("/opt/ml/segmentation/input/data/test.json")
+    submission = pd.read_csv('/opt/ml/segmentation/sample_submission.csv', index_col=None)
+    json_dir = "/opt/ml/segmentation/input/data/test.json"
     with open(json_dir, "r", encoding="utf8") as outfile:
         datas = json.load(outfile)
 
