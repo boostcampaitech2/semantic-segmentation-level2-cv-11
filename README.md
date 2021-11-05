@@ -1,6 +1,6 @@
 # <div align='center'>Quick Start<div>
-
-## baseline code 
+<details open>
+<summary> ## baseline code </summary>
 
 ### Train
 
@@ -25,15 +25,27 @@ Train과 마찬가지로 `configs/` 경로에 있는 `config.ini` 파일을 통�
 ```bash
 python train.py --config_dir {config.ini path} --model_dir {model.pt path}
 ```
+</details>
 
-## mmsegmentation
+<details open>
+<summary> ## mmsegmentation </summary>
+
+
 
 ### Train
 
 ### inference
 
-## Tools
+</details>
+
+
+<details open>
+<summary> ## Tools <summary>
 
 ### SWA
 
+`SWA/` 디렉토리에 SWA를 원하는 가중치 
+
 ### ensemble
+
+</details>
