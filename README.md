@@ -1,5 +1,7 @@
 # <div align='center'>Quick Start<div>
 
+## baseline code 
+
 ### Train
 
 `configs/` 경로에 있는 `config.ini` 파일을 통해 hyper parameters 및 path 등을 수정합니다. 
@@ -24,3 +26,14 @@ Train과 마찬가지로 `configs/` 경로에 있는 `config.ini` 파일을 통�
 python train.py --config_dir {config.ini path} --model_dir {model.pt path}
 ```
 
+## mmsegmentation
+
+### Train
+
+### inference
+
+## Tools
+
+### SWA
+
+### ensemble
