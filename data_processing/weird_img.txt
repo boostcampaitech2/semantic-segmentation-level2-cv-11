@@ -1,0 +1,159 @@
+batch_01_vt/0003.jpg : general trash가 윗부분은 라벨링이 되어있어야 할 것 같음
+batch_01_vt/0007.jpg : 가운데 비어있는 부분도 플라스틱으로 라벨링 됨
+batch_01_vt/0018.jpg : 쓰레기 봉지 터진 부분을 잡을 수 있을지
+batch_01_vt/0024.jpg : 왼쪽 상단에 조그만한 쓰레기 봉투랑 오른쪽 끝에 Paper를 잘 분류할 수 있을지
+batch_01_vt/0030.jpg : 너무 작은 쓰레기도 잡혀있음
+batch_01_vt/0036.jpg : 게토레이가 안잡혀있고 그림자 때문에 이미지에 색 차이가 있음
+batch_01_vt/0045.jpg : 배경이 아닌 파란색 상자가 제대로 라벨링이 안됨
+batch_01_vt/0047.jpg : Gneral trash부분 이상함
+batch_01_vt/0080.jpg : 돌까지 라벨링 됨
+batch_01_vt/0138.jpg : 너무 작은 일반 쓰레기가 잡혀있다
+batch_01_vt/0147.jpg : papaer가 하나도 라벨링 안되어있음
+batch_01_vt/0149.jpg : paper 라벨링 안됨
+batch_01_vt/0157.jpg : general trash weird
+batch_01_vt/0190.jpg : papaer pack 인지 glass로 해야되는지 애매
+batch_01_vt/0195.jpg : closthes weird
+batch_01_vt/0199.jpg : 이전 이미지에는 축구공 쓰레바퀴 라벨링 안했는데 되있음
+batch_01_vt/0211.jpg : 배터리 라벨링 아예없음
+batch_01_vt/0252.jpg : 편지봉투 라벨링 안됨
+batch_01_vt/0274.jpg : metal -> plastic
+batch_01_vt/0443.jpg : 안에 물건이 많은데 다 플라스틱이라 라벨링
+batch_01_vt/0639.jpg : 변기 라벨링 안됨
+batch_01_vt/0671.jpg : left plastic?
+batch_01_vt/0721.jpg : 목장갑 라벨링
+batch_01_vt/0744.jpg : 비닐봉지안에 있는게 라벨링이 되는것도 있고 안되는것도 있음
+batch_01_vt/0932.jpg : 종이컵 안
+batch_01_vt/1066.jpg : 안에 종이
+batch_01_vt/1203.jpg : 바깥 바구니도 처리를 해야되지 않나?
+batch_01_vt/1231.jpg : 봉지안에 패트병 하나만 라벨링 됨
+batch_01_vt/1235.jpg : 켄 하나도 라벨링 안됨batch_02_vt/0031.jpg : 병 라벨링 x
+batch_02_vt/0050.jpg : 라벨링 위치가 이상함batch_02_vt/0381.jpg : 380번 이미지와 다른 배경 라벨링
+batch_02_vt/0434.jpg : 장난감 plastic x
+batch_02_vt/0462.jpg : glass 라벨링 x
+batch_02_vt/0463.jpg : 뒤에 plastic bag x
+batch_02_vt/0490.jpg : 테이프 라벨링 x
+batch_02_vt/0513.jpg : 오른쪽 plastic bag이 이상함
+batch_02_vt/0545.jpg : no glass
+batch_02_vt/0697.jpg : 택 라벨링
+batch_02_vt/0713.jpg : 아이스박스 안에 종이컵
+batch_02_vt/0819.jpg : 종이랑 비닐 라벨링 애매
+batch_02_vt/0861.jpg : tape labeling
+batch_02_vt/0862.jpg : plastic bag inside labeling
+batch_02_vt/0885.jpg : 테이프라벨링
+batch_02_vt/0912.jpg : tape
+batch_02_vt/0920.jpg : tape
+batch_02_vt/0953.jpg : tape
+batch_02_vt/0965.jpg : tape
+batch_02_vt/0966.jpg : beer
+batch_02_vt/0973.jpg : 왜 다 metal?
+batch_02_vt/0978.jpg : pass
+batch_02_vt/1027.jpg : tape
+batch_02_vt/1036.jpg : 밑에 종이박스 
+batch_02_vt/1043.jpg : tape
+batch_02_vt/1059.jpg : plastic bag 안에 플라스틱 병들 라벨링
+batch_02_vt/1077.jpg : plastic 병 라벨링 안됨
+batch_02_vt/1107.jpg : tv? plastic?
+batch_02_vt/1164.jpg : plastic bag 안에 라벨링
+batch_02_vt/1185.jpg : plastic bag labeling?
+batch_02_vt/1205.jpg : plastic bag labeling?
+batch_02_vt/1265.jpg : tape
+batch_02_vt/1334.jpg : plastic bag inside labeling
+batch_02_vt/1389.jpg : no labeling plastic bag
+batch_02_vt/1416.jpg : no labeling paper
+batch_02_vt/1462.jpg : no labeling plastic
+batch_02_vt/1547.jpg : paper labeling
+batch_02_vt/1588.jpg : tape
+batch_02_vt/1818.jpg : labeling error
+batch_02_vt/1820.jpg : plastic bag error
+batch_02_vt/1840.jpg : tape
+batch_02_vt/1851.jpg : general trash on paper
+batch_02_vt/1856.jpg : tape on paper
+batch_02_vt/1858.jpg : 왼쪽아래 not plastic bag
+batch_02_vt/1860.jpg : not plastic bag
+batch_02_vt/1885.jpg : labeling on plastic bog
+batch_02_vt/1891.jpg : plastic bag
+batch_02_vt/1899.jpg : not plastic bag
+batch_02_vt/1904.jpg : tape
+batch_02_vt/1912.jpg : tape and 담배
+batch_02_vt/1918.jpg : plastic bag
+batch_02_vt/1931.jpg : tape
+batch_02_vt/1942.jpg : not general trash 
+batch_02_vt/1954.jpg : not general trash
+batch_02_vt/1955.jpg : tape
+batch_02_vt/1958.jpg : plastic bag
+batch_02_vt/1959.jpg : paper
+batch_02_vt/1981.jpg : plastic bag
+batch_02_vt/1999.jpg : tape
+batch_02_vt/2004.jpg : paper
+batch_03/0025.jpg : not labeling
+batch_03/0026.jpg : labeling error
+batch_03/0065.jpg : paper
+batch_03/0090.jpg : 담배
+batch_03/0107.jpg : not paper
+batch_03/0109.jpg : not paper
+batch_03/0139.jpg : not plastic bag
+batch_03/0154.jpg : background
+batch_03/0184.jpg : paper
+batch_03/0186.jpg : plastic
+batch_03/0222.jpg : back ground
+batch_03/0224.jpg : paper
+batch_03/0229.jpg : not plastic bag
+batch_03/0236.jpg : 담배
+batch_03/0239.jpg : not plastic bag
+batch_03/0248.jpg : paper
+batch_03/0271.jpg : plastic bag
+batch_03/0282.jpg : plastic bag
+batch_03/0285.jpg : labeling error
+batch_03/0286.jpg : labeling error
+batch_03/0299.jpg : not plastic
+batch_03/0334.jpg : not paper
+batch_03/0342.jpg : metal
+batch_03/0345.jpg : not plastic
+batch_03/0381.jpg : not labeling
+batch_03/0397.jpg : not general trash
+batch_03/0402.jpg : not plastic
+batch_03/0424.jpg : not plastic
+batch_03/0460.jpg : 담배
+batch_03/0462.jpg : not clothing
+batch_03/0474.jpg : not plastic bag
+batch_03/0475.jpg : paper
+batch_03/0503.jpg : tape
+batch_03/0509.jpg : plastic bag
+batch_03/0512.jpg : paper bag in metal
+batch_03/0521.jpg : paper
+batch_03/0532.jpg : labeing error
+batch_03/0552.jpg : not paper
+batch_03/0566.jpg : 담배
+batch_03/0571.jpg : not plastic bag
+batch_03/0574.jpg : paper
+batch_03/0576.jpg : paper
+batch_03/0578.jpg : not general trash
+batch_03/0583.jpg : labeling error
+batch_03/0588.jpg : labeling error
+batch_03/0595.jpg : not labelning
+batch_03/0610.jpg : 가운데 not labeling
+batch_03/0614.jpg : 담배
+batch_03/0628.jpg : labeling error
+batch_03/0630.jpg : not plastic
+batch_03/0634.jpg : not plastic bag
+batch_03/0654.jpg : paper
+batch_03/0702.jpg : not labeling
+batch_03/0723.jpg : not plastic
+batch_03/0730.jpg : tape
+batch_03/0757.jpg : tape
+batch_03/0783.jpg : labeling error
+batch_03/0817.jpg : not labeling
+batch_03/0819.jpg : not labeling
+batch_03/0822.jpg : not labeling
+batch_03/0845.jpg : plastic bag
+batch_03/0860.jpg : not general trash
+batch_03/0867.jpg : not paper
+batch_03/0894.jpg : 윗부분 plastic
+batch_03/0896.jpg : 윗부분 plastic
+batch_03/0922.jpg : not labeling
+batch_03/0951.jpg : not background
+batch_03/0962.jpg : labeling error
+batch_03/0965.jpg : not labeling
+batch_03/0971.jpg : not labeling
+batch_03/0981.jpg : not plastic bag
+batch_03/0990.jpg : plastic in paper

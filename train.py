@@ -33,6 +33,8 @@ from trainer import Trainer
 from utils import collate_fn, get_save_dir
 from optimizer import get_optimizer, get_scheduler
 
+from losses import FocalLoss
+
 import wandb
 
 def main(config, resume):
@@ -73,7 +75,7 @@ def main(config, resume):
 
     preprocessing_fn = smp.encoders.get_preprocessing_fn(encoder_name, encoder_weight)
 
-    train_dataset = CustomDataLoader(data_dir=train_path if val_every != 0 else train_all_path, mode='train', transform=train_transform, preprocessing=get_preprocessing(preprocessing_fn) if preprocessing else False)
+    train_dataset = CustomDataLoader(data_dir=train_all_path, mode='train', transform=train_transform, preprocessing=get_preprocessing(preprocessing_fn) if preprocessing else False)
     val_dataset = CustomDataLoader(data_dir=val_path, mode='val', transform=val_transform , preprocessing=get_preprocessing(preprocessing_fn) if preprocessing else False)
 
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, 
@@ -98,27 +100,26 @@ def main(config, resume):
         encoder_name=encoder_name, 
         encoder_weights=encoder_weight,
         in_channels=3,
-        classes=11
+        classes=11,
+        #aux_params = aux_params
     )
-
-    
 
     saved_dir = get_save_dir(config.get('path','saved_dir'))
     if not osp.isdir(saved_dir):
         os.mkdir(saved_dir)
         
+    kwargs = {"alpha": 0.5, "gamma": 4.0, "reduction": 'mean'}
+    criterion = FocalLoss(**kwargs)
     #criterion = nn.CrossEntropyLoss()
-    loss = config.get('hyper_params','loss')
-    criterion = nn.CrossEntropyLoss()
     optimizer = get_optimizer(model, config.get('hyper_params','optimizer'), lr=learning_rate,momentum=momentum, weight_decay=weight_decay)
-    # optimizer = optimizer(params = model.parameters(), lr = learning_rate, weight_decay=weight_decay)
-    
-    trainer = Trainer(num_epochs, model, train_loader, val_loader, criterion, optimizer, saved_dir, val_every, batch_size, resume_path, device)
+    #scheduler = get_scheduler('cosineanealingwarmrestarts', optimizer)
+
+    trainer = Trainer(num_epochs, model, train_loader, val_loader, criterion, optimizer, saved_dir, 50, batch_size, resume_path, device, scheduler=None)
 
     #wandb init
     wandb.init(entity="carry-van", project=wandb_project, name=wandb_name, config={
         "device":device, "architecture":architecture,  "batch_size":batch_size,"num_epochs":num_epochs, 
-        "optimizer":optimizer, "learnig_rate":learning_rate, "preprocessing":preprocessing, "criterion":criterion, 
+        "optimizer":config.get('hyper_params','optimizer'), "learnig_rate":learning_rate, "preprocessing":preprocessing, "criterion":criterion, 
         "encoder_name":encoder_name,"encoder_weight": encoder_weight})
 
     trainer.train()

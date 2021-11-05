@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'CustomDataset'
-data_root = '/opt/ml/segmentation/mmseg_data/'
+data_root = '/opt/ml/segmentation/semantic-segmentation-level2-cv-11/mmseg_data/'
 
 # class settings
 classes = ['Background', 'General trash', 'Paper', 'Paper pack', 'Metal', 'Glass', 'Plastic','Styrofoam', 'Plastic bag', 'Battery', 'Clothing']
@@ -19,7 +19,7 @@ train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
     dict(type='Resize', img_scale=(512, 512), ratio_range=(0.5, 2.0)),
-    # dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=0.75),
+    dict(type='RandomCrop', crop_size=(512, 512), cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5),
     dict(type='PhotoMetricDistortion'),
     dict(type='Normalize', **img_norm_cfg),
@@ -31,7 +31,7 @@ test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(2048, 512),
+        img_scale=(512, 512),
         # img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
         flip=False,
         transforms=[
@@ -43,7 +43,7 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=20,
+    samples_per_gpu=12,
     workers_per_gpu=8,
     train=dict(
         classes=classes,

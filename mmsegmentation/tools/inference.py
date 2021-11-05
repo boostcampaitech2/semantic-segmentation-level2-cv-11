@@ -47,8 +47,8 @@ def main(args):
     output = single_gpu_test(model, data_loader)
 
     # sample_submisson.csv 열기
-    submission = pd.read_csv('/opt/ml/segmentation/baseline/sample_submission.csv', index_col=None)
-    json_dir = os.path.join("/opt/ml/segmentation/input/data/test.json")
+    submission = pd.read_csv('/opt/ml/segmentation/semantic-segmentation-level2-cv-11/sample_submission.csv', index_col=None)
+    json_dir = os.path.join("/opt/ml/segmentation/semantic-segmentation-level2-cv-11/input/data/test.json")
     with open(json_dir, "r", encoding="utf8") as outfile:
         datas = json.load(outfile)
 

@@ -4,7 +4,7 @@ log_config = dict(
     hooks=[
         dict(type='TextLoggerHook', by_epoch=False),
         dict(type='WandbLoggerHook',
-            init_kwargs=dict(project='mmsegmentation', entity='carry-van', name='hrnetw48_40k'))
+            init_kwargs=dict(project='mmsegmentation', entity='carry-van', name='PSA'))
         # dict(type='TensorboardLoggerHook')
     ])
 # yapf:enable
