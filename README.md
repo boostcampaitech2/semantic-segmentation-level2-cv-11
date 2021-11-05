@@ -7,7 +7,7 @@ $ wget https://aistages-prod-server-public.s3.amazonaws.com/app/Competitions/000
 
 # <div align='center'>Quick Start Examples<div>
 
-## <div align='center'> baseline code <div>
+## <div align='left'> baseline code <div>
 <details>
 <summary> train </summary>
 
@@ -38,7 +38,7 @@ $ python train.py --config_dir {config.ini path} --model_dir {model.pt path}
 
 
 
-## <div align='center'> mmsegmentation <div>
+## <div align='left'> mmsegmentation <div>
 
 <details>
 <summary> train </summary>
@@ -52,7 +52,7 @@ $ python train.py --config_dir {config.ini path} --model_dir {model.pt path}
 
 
 
-## <div align='center'> Tools <div>
+## <div align='left'> Tools <div>
 
 <details>
 <summary> SWA </summary>
