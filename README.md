@@ -1,6 +1,6 @@
 # <div align='center'>Quick Start<div>
 <details open>
-<summary> ## baseline code </summary>
+<summary> baseline code </summary>
 
 ### Train
 
@@ -28,7 +28,7 @@ python train.py --config_dir {config.ini path} --model_dir {model.pt path}
 </details>
 
 <details open>
-<summary> ## mmsegmentation </summary>
+<summary> mmsegmentation </summary>
 
 
 
@@ -40,7 +40,7 @@ python train.py --config_dir {config.ini path} --model_dir {model.pt path}
 
 
 <details open>
-<summary> ## Tools <summary>
+<summary> Tools </summary>
 
 ### SWA
 
