@@ -1,8 +1,8 @@
-# <div align='center'>Quick Start<div>
-<details open>
-<summary> baseline code </summary>
+# <div align='center'>Quick Start Examples<div>
 
-### Train
+### baseline code
+<details open>
+<summary> train </summary>
 
 `configs/` 경로에 있는 `config.ini` 파일을 통해 hyper parameters 및 path 등을 수정합니다. 
 
@@ -17,8 +17,10 @@ or
 ```bash
 nohup python train.py --config_dir {config.ini path}&
 ```
+</details>
 
-### inference
+<details open>
+<summary> inference </summary>
 
 Train과 마찬가지로 `configs/` 경로에 있는 `config.ini` 파일을 통해 inference 를 수행합니다. 
 
@@ -27,25 +29,32 @@ python train.py --config_dir {config.ini path} --model_dir {model.pt path}
 ```
 </details>
 
+
+
+### mmsegmentation 
+
 <details open>
-<summary> mmsegmentation </summary>
+<summary> train </summary>
 
+</details>
 
-
-### Train
-
-### inference
+<details open>
+<summary> inference </summary>
 
 </details>
 
 
-<details open>
-<summary> Tools </summary>
 
-### SWA
+### Tools 
+
+<details open>
+<summary> SWA </summary>
 
 `SWA/` 디렉토리에 SWA를 원하는 가중치 
 
-### ensemble
+</details>
+
+<details open>
+<summary> ensemble </summary>
 
 </details>
