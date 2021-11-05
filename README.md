@@ -1,6 +1,6 @@
 # <div align='center'>Quick Start Examples<div>
 
-### baseline code
+### <div align='center'> baseline code <div>
 <details open>
 <summary> train </summary>
 
@@ -31,7 +31,7 @@ python train.py --config_dir {config.ini path} --model_dir {model.pt path}
 
 
 
-### mmsegmentation 
+### <div align='center'> mmsegmentation <div>
 
 <details open>
 <summary> train </summary>
@@ -45,12 +45,18 @@ python train.py --config_dir {config.ini path} --model_dir {model.pt path}
 
 
 
-### Tools 
+### <div align='center'> Tools <div>
 
 <details open>
 <summary> SWA </summary>
 
-`SWA/` 디렉토리에 SWA를 원하는 가중치 
+SWA는 한 모델의 연속된 epoch or iteration 을 저장해 parameter의 가중치를 더한 후 평균 값을 도출 
+
+`SWA/` 디렉토리에 SWA를 원하는 pth 파일 넣어서 `swa.py` 실행시 현 경로에 `swa.pth` 저장
+
+```bash
+python tools/swa.py
+```
 
 </details>
 
