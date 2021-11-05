@@ -4,6 +4,7 @@ import os
 import glob
 import random
 import re
+import wandb
 
 def _fast_hist(label_true, label_pred, n_class):
     mask = (label_true >= 0) & (label_true < n_class)
@@ -68,3 +69,14 @@ def get_save_dir(saved_dir, dump=False):
         i = [int(m.groups()[0]) for m in matches if m]
         n = max(i) + 1 if i else 2
         return f"{saved_dir}{n}"
+
+def _labels(category_names):
+  l = {}
+  for i, label in enumerate(category_names):
+    l[i] = label
+  return l
+
+def wb_mask(bg_img, pred_mask, true_mask, category_names):
+  return wandb.Image(bg_img, masks={
+    "prediction" : {"mask_data" : pred_mask, "class_labels" : _labels(category_names)},
+    "ground truth" : {"mask_data" : true_mask, "class_labels" : _labels(category_names)}})   

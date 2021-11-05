@@ -2,9 +2,8 @@ import numpy as np
 import torch
 import os.path as osp
 import wandb
-from wandb_img import wb_mask
 
-from utils import label_accuracy_score, add_hist
+from utils import label_accuracy_score, add_hist, wb_mask
 
 class Trainer(object):
 
