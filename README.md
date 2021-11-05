@@ -1,7 +1,7 @@
 # <div align='center'>Quick Start Examples<div>
 
-### <div align='center'> baseline code <div>
-<details open>
+## <div align='center'> baseline code <div>
+<details>
 <summary> train </summary>
 
 `configs/` 경로에 있는 `config.ini` 파일을 통해 hyper parameters 및 path 등을 수정합니다. 
@@ -19,7 +19,7 @@ nohup python train.py --config_dir {config.ini path}&
 ```
 </details>
 
-<details open>
+<details>
 <summary> inference </summary>
 
 Train과 마찬가지로 `configs/` 경로에 있는 `config.ini` 파일을 통해 inference 를 수행합니다. 
@@ -31,23 +31,23 @@ python train.py --config_dir {config.ini path} --model_dir {model.pt path}
 
 
 
-### <div align='center'> mmsegmentation <div>
+## <div align='center'> mmsegmentation <div>
 
-<details open>
+<details>
 <summary> train </summary>
 
 </details>
 
-<details open>
+<details>
 <summary> inference </summary>
 
 </details>
 
 
 
-### <div align='center'> Tools <div>
+## <div align='center'> Tools <div>
 
-<details open>
+<details>
 <summary> SWA </summary>
 
 SWA는 한 모델의 연속된 epoch or iteration 을 저장해 parameter의 가중치를 더한 후 평균 값을 도출 
@@ -60,7 +60,7 @@ python tools/swa.py
 
 </details>
 
-<details open>
+<details>
 <summary> ensemble </summary>
 
 </details>
