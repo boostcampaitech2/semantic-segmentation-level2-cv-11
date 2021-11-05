@@ -1,1 +1,1 @@
-{"train/decode.loss_ce": 0.10168742179870606, "train/decode.acc_seg": 82.62656860351562, "train/loss": 0.10168742179870606, "learning_rate": 0.007753396933736729, "momentum": 0.9, "_runtime": 10659, "_timestamp": 1634819279, "_step": 9950}
+{"train/decode.loss_ce": 0.02879721812903881, "train/decode.acc_seg": 84.11276977539063, "train/loss": 0.02879721812903881, "learning_rate": 0.00010071413645342543, "momentum": 0.9, "_runtime": 42784, "_timestamp": 1634851404, "_step": 40000, "_wandb": {"runtime": 42851}}

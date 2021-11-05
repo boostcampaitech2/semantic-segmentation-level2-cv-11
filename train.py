@@ -35,7 +35,7 @@ from optimizer import get_optimizer, get_scheduler
 
 import wandb
 
-def main(config):
+def main(config, resume):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     batch_size = config.getint('hyper_params', 'batch_size')
     num_epochs = config.getint('hyper_params', 'num_epochs')
@@ -46,6 +46,8 @@ def main(config):
     momentum = config.getfloat('hyper_params', 'momentum')
     num_workers = config.getint('hyper_params', 'num_workers')
     preprocessing = config.getboolean('hyper_params', 'preprocessing')
+    drop_last = config.getboolean('hyper_params','preprocessing')
+    resume_path = resume
     #wandb config
     wandb_project = config.get('wandb', 'project')
     wandb_name = config.get('wandb', 'name')
@@ -69,8 +71,8 @@ def main(config):
 
     encoder_name = config.get('model', 'encoder_name')
     encoder_weight = config.get('model', 'encoder_weight')
-
-    preprocessing_fn = smp.encoders.get_preprocessing_fn(encoder_name, encoder_weight)
+    if preprocessing:
+        preprocessing_fn = smp.encoders.get_preprocessing_fn(encoder_name, encoder_weight)
 
     train_dataset = CustomDataLoader(data_dir=train_path if val_every != 0 else train_all_path, mode='train', transform=train_transform, preprocessing=get_preprocessing(preprocessing_fn) if preprocessing else False)
     val_dataset = CustomDataLoader(data_dir=val_path, mode='val', transform=val_transform , preprocessing=get_preprocessing(preprocessing_fn) if preprocessing else False)
@@ -79,14 +81,16 @@ def main(config):
                                            batch_size=batch_size,
                                            shuffle=True,
                                            num_workers=num_workers,
-                                           collate_fn=collate_fn
+                                           collate_fn=collate_fn,
+                                           drop_last=drop_last
                                            )
 
     val_loader = torch.utils.data.DataLoader(dataset=val_dataset, 
                                          batch_size=batch_size,
                                          shuffle=False,
                                          num_workers=num_workers,
-                                         collate_fn=collate_fn
+                                         collate_fn=collate_fn,
+                                         drop_last=drop_last
                                          )
 
     architecture = config.get('model','architecture')
@@ -99,6 +103,8 @@ def main(config):
         in_channels=3,
         classes=11
     )
+    
+    
 
     saved_dir = get_save_dir(config.get('path','saved_dir'))
     if not osp.isdir(saved_dir):
@@ -108,14 +114,13 @@ def main(config):
     optimizer = get_optimizer(model, config.get('hyper_params','optimizer'), lr=learning_rate,momentum=momentum, weight_decay=weight_decay)
     # optimizer = optimizer(params = model.parameters(), lr = learning_rate, weight_decay=weight_decay)
     
-    trainer = Trainer(num_epochs, model, train_loader, val_loader, criterion, optimizer, saved_dir, val_every, batch_size, device)
+    trainer = Trainer(num_epochs, model, train_loader, val_loader, criterion, optimizer, saved_dir, val_every, batch_size, resume_path, device)
 
     #wandb init
     wandb.init(entity="carry-van", project=wandb_project, name=wandb_name, config={
-        "device":device, "batch_size":batch_size,"num_epochs":num_epochs, "learnig_rate":learning_rate, "preprocessing":preprocessing})
-    wandb.config.encoder_name = encoder_name
-    wandb.config.encoder_weight = encoder_weight
-    wandb.config.architecture = architecture
+        "device":device, "architecture":architecture,  "batch_size":batch_size,"num_epochs":num_epochs, 
+        "optimizer":config.get('hyper_params','optimizer'), "learnig_rate":learning_rate, "preprocessing":preprocessing, "criterion":criterion, 
+        "encoder_name":encoder_name,"encoder_weight": encoder_weight})
 
     trainer.train()
 
@@ -127,8 +132,13 @@ if __name__ == '__main__':
         type=str,
         default="./configs/config.ini"
     )
+    parser.add_argument(
+        '--resume',
+        type=str,
+        default=None
+    )
     args = parser.parse_args()
     config = ConfigParser()
     config.read(args.config_dir)
    
-    main(config)
+    main(config, args.resume)
