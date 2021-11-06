@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'CustomDataset'
-data_root = '/opt/ml/segmentation/mmseg_data/'
+data_root = '/opt/ml/segmentation/semantic-segmentation-level2-cv-11/mmseg_data/'
 
 # class settings
 classes = ['Background', 'General trash', 'Paper', 'Paper pack', 'Metal', 'Glass', 'Plastic','Styrofoam', 'Plastic bag', 'Battery', 'Clothing']
@@ -31,8 +31,13 @@ test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
+<<<<<<< HEAD
+        img_scale=(512, 512),
+        # img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
+=======
         img_scale=[(512, 512), (256, 256)],
         img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
+>>>>>>> 543d56c8b405f5f9872b096c611abec6e90a2563
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),

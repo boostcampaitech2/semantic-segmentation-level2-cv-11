@@ -7,7 +7,7 @@ from utils import label_accuracy_score, add_hist, wb_mask
 
 class Trainer(object):
 
-    def __init__(self, num_epochs, model, data_loader, val_loader, criterion, optimizer, saved_dir, val_every, batch_size, resume_path, device):
+    def __init__(self, num_epochs, model, data_loader, val_loader, criterion, optimizer, saved_dir, val_every, batch_size, resume_path, device, scheduler=None):
 
         self.num_epochs = num_epochs
         self.model = model
@@ -15,6 +15,7 @@ class Trainer(object):
         self.val_loader = val_loader
         self.criterion = criterion
         self.optimizer = optimizer
+        self.scheduler = scheduler
         self.saved_dir = saved_dir
         self.val_every = val_every
         self.batch_size = batch_size
@@ -25,6 +26,7 @@ class Trainer(object):
         if self.resume_path:
             self.model.to(device)
             check_point = torch.load(resume_path)
+            
             self.model.load_state_dict(check_point['state_dict'])
             self.optimizer.load_state_dict(check_point['optimizer'])
             self.start_epoch = check_point['epoch']
@@ -78,7 +80,7 @@ class Trainer(object):
                 self.optimizer.zero_grad()
                 loss.backward()
                 self.optimizer.step()
-
+               
                 outputs = torch.argmax(outputs, dim=1).detach().cpu().numpy()
                 masks = masks.detach().cpu().numpy()
 
@@ -99,6 +101,7 @@ class Trainer(object):
                         f.write(','.join(log) + '\n')
 
                     wandb.log({"Train Epoch":epoch+1,"Train Loss":round(loss.item(),4), 'Train mIoU': round(mIoU,4)})
+                    
             if self.val_every != 0:
                 if (epoch + 1) % self.val_every == 0:
                     avrg_loss, avrg_mIoU = self._validation(epoch + 1, model)
@@ -115,6 +118,7 @@ class Trainer(object):
                         output_path = osp.join(self.saved_dir, 'best_loss.pt')
                         torch.save(model, output_path)
             
+            #self.scheduler.step()
             check_point = {
                 'epoch': epoch + 1,
                 'state_dict': model.state_dict(),
