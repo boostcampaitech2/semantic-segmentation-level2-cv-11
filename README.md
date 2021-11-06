@@ -79,11 +79,12 @@ SWA는 한 모델의 연속된 epoch or iteration 을 저장해 parameter의 가
 ```bash
 $ python tools/swa.py
 ```
-
 </details>
 
 <details>
+
 <summary> ensemble </summary>
+
 - 경로 : `/mmsegmentation/tools`
     
     `--model_dir` : csv파일이 들어있는 경로
@@ -92,7 +93,6 @@ $ python tools/swa.py
     
     `--weight`  : 각 모델의 weight
     
-
 ```python
 python tools/ensemble.py --model_dir [model_dir : str] --save_dir [save_dir : str] --weight [weight : list]
 ```  
@@ -100,6 +100,7 @@ python tools/ensemble.py --model_dir [model_dir : str] --save_dir [save_dir : st
 
 <details>
 <summary> copy_paste  </summary>
+
 - 경로 : `/mmsegmentation/tools`
 - Augmentation의 기법중 하나인 copy&paste 수행
 
@@ -110,6 +111,7 @@ python tools/ensemble.py
 
 <details>
 <summary> EDA </summary>
+
 - 경로 : `/mmsegmentation/tools`
 - 데이터셋 EDA
 - `.ipynb` 파일
@@ -117,6 +119,7 @@ python tools/ensemble.py
 
 <details>
 <summary> make_json </summary>
+
 - 경로 : `/mmsegmentation/tools`
 - 카테고리별 json파일 생성
  
