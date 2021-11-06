@@ -190,3 +190,7 @@ wandb/
 configs/
 !mmsegmentation/configs/*
 submission/
+mmseg_data/
+mmseg_trainall/
+*.csv
+*.pth

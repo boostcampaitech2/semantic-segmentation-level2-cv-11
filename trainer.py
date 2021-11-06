@@ -2,9 +2,8 @@ import numpy as np
 import torch
 import os.path as osp
 import wandb
-from wandb_img import wb_mask
 
-from utils import label_accuracy_score, add_hist
+from utils import label_accuracy_score, add_hist, wb_mask
 
 class Trainer(object):
 
@@ -184,6 +183,10 @@ class Trainer(object):
             if len(mask_list) != 0:
                 wandb.log({"Images":mask_list})
                 mask_list = []
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 543d56c8b405f5f9872b096c611abec6e90a2563
             with open(osp.join(self.saved_dir, 'log.csv'),'a') as f:
                 log = [epoch, 'Val'] + [''] * 5 + \
                     [round(avrg_loss.item(),4)] + metrics 

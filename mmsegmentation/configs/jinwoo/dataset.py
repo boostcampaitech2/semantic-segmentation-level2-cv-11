@@ -18,8 +18,8 @@ crop_size = (512, 512)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
-    dict(type='Resize', img_scale=(512, 512), ratio_range=(0.5, 2.0)),
-    dict(type='RandomCrop', crop_size=(512, 512), cat_max_ratio=0.75),
+    dict(type='Resize', img_scale=[(256, 256), (512, 512), (1024, 1024)], multiscale_mode='value', ratio_range=None),
+    dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5),
     dict(type='PhotoMetricDistortion'),
     dict(type='Normalize', **img_norm_cfg),
@@ -31,8 +31,13 @@ test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
+<<<<<<< HEAD
         img_scale=(512, 512),
         # img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
+=======
+        img_scale=[(512, 512), (256, 256)],
+        img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
+>>>>>>> 543d56c8b405f5f9872b096c611abec6e90a2563
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),

@@ -48,6 +48,7 @@ def main(config, resume):
     momentum = config.getfloat('hyper_params', 'momentum')
     num_workers = config.getint('hyper_params', 'num_workers')
     preprocessing = config.getboolean('hyper_params', 'preprocessing')
+    drop_last = config.getboolean('hyper_params','preprocessing')
     resume_path = resume
     #wandb config
     wandb_project = config.get('wandb', 'project')
@@ -72,8 +73,8 @@ def main(config, resume):
 
     encoder_name = config.get('model', 'encoder_name')
     encoder_weight = config.get('model', 'encoder_weight')
-
-    preprocessing_fn = smp.encoders.get_preprocessing_fn(encoder_name, encoder_weight)
+    if preprocessing:
+        preprocessing_fn = smp.encoders.get_preprocessing_fn(encoder_name, encoder_weight)
 
     train_dataset = CustomDataLoader(data_dir=train_all_path, mode='train', transform=train_transform, preprocessing=get_preprocessing(preprocessing_fn) if preprocessing else False)
     val_dataset = CustomDataLoader(data_dir=val_path, mode='val', transform=val_transform , preprocessing=get_preprocessing(preprocessing_fn) if preprocessing else False)
@@ -82,14 +83,16 @@ def main(config, resume):
                                            batch_size=batch_size,
                                            shuffle=True,
                                            num_workers=num_workers,
-                                           collate_fn=collate_fn
+                                           collate_fn=collate_fn,
+                                           drop_last=drop_last
                                            )
 
     val_loader = torch.utils.data.DataLoader(dataset=val_dataset, 
                                          batch_size=batch_size,
                                          shuffle=False,
                                          num_workers=num_workers,
-                                         collate_fn=collate_fn
+                                         collate_fn=collate_fn,
+                                         drop_last=drop_last
                                          )
 
     architecture = config.get('model','architecture')
@@ -103,6 +106,8 @@ def main(config, resume):
         classes=11,
         #aux_params = aux_params
     )
+    
+    
 
     saved_dir = get_save_dir(config.get('path','saved_dir'))
     if not osp.isdir(saved_dir):
