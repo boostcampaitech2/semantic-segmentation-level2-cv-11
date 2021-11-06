@@ -102,7 +102,6 @@ python tools/ensemble.py --model_dir [model_dir : str] --save_dir [save_dir : st
 <summary> copy_paste  </summary>
 
 - 경로 : `/mmsegmentation/tools`
-- Augmentation의 기법중 하나인 copy&paste 수행
 
 ```python
 python tools/ensemble.py 
@@ -113,7 +112,6 @@ python tools/ensemble.py
 <summary> EDA </summary>
 
 - 경로 : `/mmsegmentation/tools`
-- 데이터셋 EDA
 - `.ipynb` 파일
 </details>
 
@@ -121,9 +119,14 @@ python tools/ensemble.py
 <summary> make_json </summary>
 
 - 경로 : `/mmsegmentation/tools`
-- 카테고리별 json파일 생성
+
+    `--original_json` : category를 추출할 json 파일 경로
+    
+    `--extract_json` : 추출된 데이터를 저장할 json 파일 경로
+    
+    `--category_num`  : 카테고리 인덱스
  
 ```python
-python tools/make_json.py --original_json {json file to extract categories from} --extract_json {extracted json file} --category_num {number of certain category}
+python tools/make_json.py --original_json {json file} --extract_json {extracted json file} --category_num {num of category}
 ```  
 </details>
