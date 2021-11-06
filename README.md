@@ -115,6 +115,7 @@ python tools/ensemble.py
 - `.ipynb` 파일
 </details>
 
+<details>
 <summary> make_json </summary>
 - 경로 : `/mmsegmentation/tools`
 - 카테고리별 json파일 생성
