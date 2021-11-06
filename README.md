@@ -130,6 +130,9 @@ python tools/ensemble.py
 python tools/make_json.py --original_json {json file} --extract_json {extracted json file} --category_num {num of category}
 ```  
 </details>
-# <div align='center'>Data Preperation<div>
+    
+# <div align='center'>Reference<div>
+    
 - https://github.com/open-mmlab/mmsegmentation
+    
 - https://github.com/qubvel/segmentation_models.pytorch
