@@ -48,8 +48,8 @@ $ python train.py --config_dir {config.ini path} --model_dir {model.pt path}
 2. `work_dir`을 지정, wandb project name, entity 설정
 3. `config_dir` 지정후 코드 실행
 
-```python
-python tools/train.py [config_dir]
+```bash
+$ python tools/train.py [config_dir]
 ```
 </details>
 
@@ -60,8 +60,8 @@ python tools/train.py [config_dir]
 1. `--config_dir` Inference할 config 선택
 2. `--epoch` Inference할 저장되어있는 pth파일 선택
 
-```python
-python tools/inference.py --config_dir[config_dir] --epoch [epoch.pth_dir]
+```bash
+$ python tools/inference.py --config_dir[config_dir] --epoch [epoch.pth_dir]
 ```
 </details>
 
@@ -93,8 +93,8 @@ $ python tools/swa.py
     
     `--weight`  : 각 모델의 weight
     
-```python
-python tools/ensemble.py --model_dir [model_dir : str] --save_dir [save_dir : str] --weight [weight : list]
+```bash
+$ python tools/ensemble.py --model_dir [model_dir : str] --save_dir [save_dir : str] --weight [weight : list]
 ```  
 </details>
 
@@ -103,8 +103,8 @@ python tools/ensemble.py --model_dir [model_dir : str] --save_dir [save_dir : st
 
 - 경로 : `/mmsegmentation/tools`
 
-```python
-python tools/ensemble.py 
+```bash
+$ python tools/ensemble.py 
 ```  
 </details>
 
@@ -126,8 +126,8 @@ python tools/ensemble.py
     
     `--category_num`  : 카테고리 인덱스
  
-```python
-python tools/make_json.py --original_json {json file} --extract_json {extracted json file} --category_num {num of category}
+```bash
+$ python tools/make_json.py --original_json {json file} --extract_json {extracted json file} --category_num {num of category}
 ```  
 </details>
     

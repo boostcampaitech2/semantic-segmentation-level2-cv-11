@@ -1,1 +1,0 @@
-{"train/decode.loss_ce": 0.02879721812903881, "train/decode.acc_seg": 84.11276977539063, "train/loss": 0.02879721812903881, "learning_rate": 0.00010071413645342543, "momentum": 0.9, "_runtime": 42784, "_timestamp": 1634851404, "_step": 40000, "_wandb": {"runtime": 42851}}
