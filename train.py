@@ -6,24 +6,15 @@ from importlib import import_module
 warnings.filterwarnings('ignore')
 
 import torch
-import torch.nn as nn
 import argparse
 from configparser import ConfigParser
-from torch.utils.data import Dataset, DataLoader, dataset
-from utils import label_accuracy_score, add_hist
-import cv2
 
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
 # 전처리를 위한 라이브러리
-from pycocotools.coco import COCO
-import torchvision
-import torchvision.transforms as transforms
 
-import albumentations as A
-from albumentations.pytorch import ToTensorV2
 import segmentation_models_pytorch as smp
 
 from dataset import CustomDataLoader
@@ -76,7 +67,7 @@ def main(config, resume):
     if preprocessing:
         preprocessing_fn = smp.encoders.get_preprocessing_fn(encoder_name, encoder_weight)
 
-    train_dataset = CustomDataLoader(data_dir=train_all_path, mode='train', transform=train_transform, preprocessing=get_preprocessing(preprocessing_fn) if preprocessing else False)
+    train_dataset = CustomDataLoader(data_dir=train_path if val_every !=0 else train_all_path, mode='train', transform=train_transform, preprocessing=get_preprocessing(preprocessing_fn) if preprocessing else False)
     val_dataset = CustomDataLoader(data_dir=val_path, mode='val', transform=val_transform , preprocessing=get_preprocessing(preprocessing_fn) if preprocessing else False)
 
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, 
@@ -104,7 +95,6 @@ def main(config, resume):
         encoder_weights=encoder_weight,
         in_channels=3,
         classes=11,
-        #aux_params = aux_params
     )
     
     
@@ -116,6 +106,7 @@ def main(config, resume):
     kwargs = {"alpha": 0.5, "gamma": 4.0, "reduction": 'mean'}
     criterion = FocalLoss(**kwargs)
     #criterion = nn.CrossEntropyLoss()
+
     optimizer = get_optimizer(model, config.get('hyper_params','optimizer'), lr=learning_rate,momentum=momentum, weight_decay=weight_decay)
     #scheduler = get_scheduler('cosineanealingwarmrestarts', optimizer)
 
